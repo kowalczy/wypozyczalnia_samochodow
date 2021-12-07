@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.samochody.wypozyczalnia_samochodow.dao.CarRepo;
 import pl.samochody.wypozyczalnia_samochodow.dao.entity.Car;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,14 @@ public class CarManager {
 
     public void deleteById(Long id){
         carRepo.deleteById(id);
+    }
+
+    public Iterable<Car> findByBrand(String brand){
+        return carRepo.findByBrand(brand);
+    }
+
+    public Iterable<Car> findByAvailable(boolean available){
+        return carRepo.findByAvailable(available);
     }
 
     @EventListener(ApplicationReadyEvent.class)

@@ -4,8 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.samochody.wypozyczalnia_samochodow.dao.entity.Car;
 import pl.samochody.wypozyczalnia_samochodow.manager.CarManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -39,7 +37,16 @@ public class CarApi {
     }
 
     @DeleteMapping
-    public void deleteCar(@RequestParam Long index){
-        carManager.deleteById(index);
+    public void deleteCar(@RequestParam Long id){
+        carManager.deleteById(id);
+    }
+
+    @GetMapping("/brand")
+    public Iterable<Car> filterByBrand(@RequestParam String brand){
+        return carManager.findByBrand(brand);
+    }
+    @GetMapping("/available")
+    public Iterable<Car> findByAvailable(@RequestParam boolean available){
+        return carManager.findByAvailable(available);
     }
 }
