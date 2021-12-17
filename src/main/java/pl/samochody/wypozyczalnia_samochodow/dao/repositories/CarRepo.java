@@ -1,4 +1,4 @@
-package pl.samochody.wypozyczalnia_samochodow.dao;
+package pl.samochody.wypozyczalnia_samochodow.dao.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import pl.samochody.wypozyczalnia_samochodow.dao.entity.Car;

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <style>
+    .button {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    .button1 {
+        padding: 4px 8px;
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+    }
+
+    .button1:hover {
+         background-color: #008CBA;
+    }
+    .button2 {
+        padding: 8px 16px;
+        position: fixed;
+        left: 50px;
+        top: 50px;
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+    }
+
+    .button2:hover {
+         background-color: #008CBA;
+         color: white;
+    }
+    .button3 {
+        padding: 8px 16px;
+        position: fixed;
+        right: 50px;
+        top: 50px;
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+    }
+
+    .button3:hover {
+         background-color: #008CBA;
+         color: white;
+    }
+    .button4 {
+        padding: 8px 16px;
+        position: fixed;
+        left: 50px;
+        top: 110px;
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+    }
+
+    .button4:hover {
+         background-color: #008CBA;
+         color: white;
+    }
+    </style>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+</head>
+<body>
+<a th:href="@{/bookings/all}">
+    <button class="button button2">Show Bookings</button>
+</a>
+<a th:href="@{/logout}">
+    <button class="button button3">Logout</button>
+</a>
+<a th:href="@{/cars/new}">
+    <button class="button button4">Add New Car</button>
+</a>
+
+<div class="container-fluid text-center">
+    <div><h2>Cars</h2></div>
+
+    <form th:action="@{/cars/filter}" method="post" th:object="${filter}" style="max-width: 400px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Brand:</label>
+                <div class="col-sm-8 p-1">
+                    <input type="text" th:field="*{brand}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Model:</label>
+                <div class="col-sm-8 p-1">
+                    <input type="text" th:field="*{model}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Show available only:</label>
+                <div class="col-sm-8 p-1">
+                    <input type="checkbox" th:field="*{available}"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <div th:if="${message}" class="alert alert-success text-center p-3">
+        [[${message}]]
+    </div>
+
+    <div class="p-3">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Horse Power</th>
+                <th>Available</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="car : ${carList}">
+                <tr>
+                    <td>[[${car.id}]]</td>
+                    <td>[[${car.brand}]]</td>
+                    <td>[[${car.model}]]</td>
+                    <td>[[${car.color}]]</td>
+                    <td>[[${car.horsepower}]]</td>
+                    <td>[[${car.available}]]</td>
+                    <td>
+                        <a th:href="@{'/cars/edit/' + ${car.id}}">
+                            <button class="button button1">Edit</button>
+                        </a>
+                        <a th:href="@{'/cars/delete/' + ${car.id}}">
+                            <button class="button button1">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
