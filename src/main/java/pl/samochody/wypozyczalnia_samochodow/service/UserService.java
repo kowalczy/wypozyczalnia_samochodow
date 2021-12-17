@@ -28,4 +28,7 @@ public class UserService {
     public AppUser findUserByUsername(String s) {
         return appUserRepo.findByUsername(s).get(); //TODO: throw if not exist orElseThrow()
     }
+    public Iterable<AppUser> getAllUsers(){
+        return appUserRepo.findAll();
+    }
 }

@@ -25,13 +25,14 @@ public class UserController {
     @PostMapping("/register")
     public String register(AppUser appUser, RedirectAttributes redirectAttributes){
         if(appUser.getUsername() != "" && appUser.getPassword() != ""){
-            if(userService.findUserByUsername(appUser.getUsername()) == null){
+            for(AppUser user : userService.getAllUsers()){
+                if(user.getUsername().equals(appUser.getUsername())){
+                    redirectAttributes.addFlashAttribute("message", "Invalid username! There is such user in a database already!");
+                    return "redirect:/sign-up";
+                }
+            }
                 userService.addUser(appUser);
                 return "redirect:/login";
-            }else {
-                redirectAttributes.addFlashAttribute("message", "Invalid username! There is such user in a database already!");
-                return "redirect:/sign-up";
-            }
         }
         redirectAttributes.addFlashAttribute("message", "Invalid username or password!");
         return "redirect:/sign-up";
