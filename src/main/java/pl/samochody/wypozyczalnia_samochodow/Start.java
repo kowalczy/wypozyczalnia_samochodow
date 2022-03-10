@@ -25,6 +25,4 @@ public class Start {
         appUserRepo.save(user);
 
     }
-
-
 }

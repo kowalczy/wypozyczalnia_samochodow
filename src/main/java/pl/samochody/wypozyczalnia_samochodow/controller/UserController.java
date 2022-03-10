@@ -31,8 +31,8 @@ public class UserController {
                     return "redirect:/sign-up";
                 }
             }
-                userService.addUser(appUser);
-                return "redirect:/login";
+            userService.addUser(appUser);
+            return "redirect:/login";
         }
         redirectAttributes.addFlashAttribute("message", "Invalid username or password!");
         return "redirect:/sign-up";
